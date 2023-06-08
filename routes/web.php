@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BodegaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/bodegas', function () {
+    return view('Bodegas');
 });
+Route::get('bodega/list', [BodegaController::class, 'obtenerBodegas'])->name('get.bodegas');
