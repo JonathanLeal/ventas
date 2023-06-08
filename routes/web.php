@@ -18,3 +18,5 @@ Route::get('/bodegas', function () {
     return view('Bodegas');
 });
 Route::get('bodega/list', [BodegaController::class, 'obtenerBodegas'])->name('get.bodegas');
+Route::get('bodega/{id}', [BodegaController::class, 'obtenerBodegaId'])->name('get.bodegaId');
+Route::post('bodega/save', [BodegaController::class, 'guardarBodega'])->name('save.bodega');
