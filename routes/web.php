@@ -22,4 +22,4 @@ Route::get('bodega/list', [BodegaController::class, 'obtenerBodegas'])->name('ge
 Route::get('bodega/{id}', [BodegaController::class, 'obtenerBodegaId'])->name('get.bodegaId');
 Route::post('bodega/save', [BodegaController::class, 'guardarBodega'])->name('save.bodega');
 
-Route::post('cliente/save', [ClienteController::class, 'clienteSave']);
+Route::post('cliente/save', [ClienteController::class, 'clienteSave'])->name('save.cliente');
