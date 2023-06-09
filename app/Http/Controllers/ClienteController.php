@@ -72,4 +72,12 @@ class ClienteController extends Controller
             return http::respuesta(http::retOK,"Cliente editado con exito");
     }
 
+    public function eliminarCliente(Request $request){
+        $idCliente = Cliente::find($request->id);//busca el id del request que viene del modelo Cliente, esto que encuentra lo almacena en idCliente
+        if(!$idCliente){//si el idCliente es diferente
+            return http::respuesta(http::retNotFound,"no se encontro el id de cliente");
+        }
+        $idCliente->delete();
+    }
+
 }
