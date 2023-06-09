@@ -68,7 +68,7 @@ class BodegaController extends Controller
             $idBodega->save();
         } catch (\Throwable $th) {
             DB::rollBack();
-            return http::respuesta(http::retError, ['error en cacth' => $th->getMessage()]);
+            return http::respuesta(http::retError, ['error en catch' => $th->getMessage()]);
         }
         DB::commit();
         return http::respuesta(http::retOK, "Bodega editada con exito");
