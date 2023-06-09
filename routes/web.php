@@ -23,3 +23,7 @@ Route::get('bodega/{id}', [BodegaController::class, 'obtenerBodegaId'])->name('g
 Route::post('bodega/save', [BodegaController::class, 'guardarBodega'])->name('save.bodega');
 
 Route::post('cliente/save', [ClienteController::class, 'clienteSave'])->name('save.cliente');
+Route::get('cliente/list', [ClienteController::class, 'listaClientes'])->name('get.cliente');
+Route::get('cliente/{id}',[ClienteController::class, 'obtenerClienteId'])->name('get.clienteId');
+Route::get('cliente/editar', [ClienteController::class, 'editarCliente'])->name('get.clienteEditar');
+Route::post('cliente/delete', [ClienteController::class, 'eliminarCliente'])->name('post.clienteDelete');
