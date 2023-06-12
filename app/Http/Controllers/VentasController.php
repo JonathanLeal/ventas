@@ -41,4 +41,6 @@ class VentasController extends Controller
 
        return http::respuesta(http::retOK, "venta realizada exitosamente");
     }
+
+    
 }
