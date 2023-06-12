@@ -23,7 +23,7 @@ class VentasController extends Controller
         return Http::respuesta(http::retError,$validator->errors());
        }
 
-       $cliente = Cliente::where('id', $request->cliente_id)->first();
+       $cliente = Cliente::find($request->cliente_id);
        if (!$cliente) {
          return http::respuesta(http::retNotFound, "no se encontro el cliente");
        }
