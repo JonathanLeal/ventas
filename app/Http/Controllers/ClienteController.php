@@ -28,12 +28,12 @@ class ClienteController extends Controller
             http::respuesta(http::retError,['error en catch' => $th->getMessage()]);
         }
         DB::commit();//si no encontro error, el commit guarda todo en la base de datos, y devuelve un mensaje de guardado con exito.
-        return http::respuesta(http::retOK, "Bodega guardada con exito");
+        return http::respuesta(http::retOK, "Cliente guardado con éxito");
 
     }
 
-    public function listaClientes(Request $request){
-     $cliente = Cliente::all($request);//$cliente me almacena todo lo que viene del request
+    public function listaClientes(){
+     $cliente = Cliente::all();//$cliente me almacena todo lo que viene del request
      if(count($cliente)==0){//si la catidad de clientes es igual a cero me envia un return de que no hay clientes
         return Http::respuesta(http::retNotFound,"No hay clientes");
      }
@@ -43,22 +43,26 @@ class ClienteController extends Controller
 
    public function obtenerClienteId($id){//voy a obtener un cliente por su id
     $idCliente = Cliente::find($id);//$idCliente guarda el id que encontró en el modelo Cliente
-    if(!$idCliente){//el signo ! quiere decir que es lo contrario, osea si no encontro ese idCliente, me devuelve un mensaje que no lo encontró
-        return http::respuesta(http::retNotFound, "No se encontro el ID de cliente");
+    if(!$idCliente){//el signo ! quiere decir que es lo contrario, osea si no encontro ese idCliente, me devuelve un mensaje que no lo encontró. ! es diferente a
+        //return http::respuesta(http::retNotFound, "No se encontro el ID de cliente");
+        return response()->json(['mensaje' => 'No se encontro el id de cliente']);
         }
-        return http::respuesta(http::retOK,$idCliente);//devuelve el cliente encontrado
+       // return http::respuesta(http::retOK,$idCliente);//devuelve el cliente encontrado
+        return $idCliente;
     }
 
     public function editarCliente(Request $request){
         $validator = Validator::make($request->all(),[//que me haga la validacion de lo que viene de request
-            'nombre_cli'=>'required|string|unique:clientes, nombre_cli']);
+            'nombre_cli'=>'required|string|unique:clientes,nombre_cli']);//no dejar espacio en el unique
 
             $idCliente = Cliente::find($request->id);//que encuentre un id en el request
             if(!$idCliente){//si no encuentra el id, me envia un mensaje de que el id no se encuentra
-                return http::respuesta(http::retNotFound,"no se encuentra el id de cliente");
+               // return http::respuesta(http::retNotFound,"no se encuentra el id de cliente");
+                return response()->json(['mensaje'=>'No se encontro el id de cliente']);
             }
             if($validator->fails()){//si encuentra fallos me devuelve un mensaje de error
                 return http::respuesta(http::retError,$validator->errors());
+
             }
             DB::beginTransaction();//inicia una transaccion
             try{
@@ -66,18 +70,23 @@ class ClienteController extends Controller
                 $idCliente->save();
             }catch(\Throwable $th){
                 DB::rollBack();
-                return http::respuesta(http::retError,['error en catch'=>$th->getMessage()]);
+                //return http::respuesta(http::retError,['error en catch'=>$th->getMessage()]);
+                return response()->json(['Error al editar Cliente' => $th->getMessage()]);
             }
             DB::commit();
-            return http::respuesta(http::retOK,"Cliente editado con exito");
+
+           return response()->json(['mensaje'=>'Cliente editado con éxito']);
     }
 
     public function eliminarCliente(Request $request){
         $idCliente = Cliente::find($request->id);//busca el id del request que viene del modelo Cliente, esto que encuentra lo almacena en idCliente
         if(!$idCliente){//si el idCliente es diferente
-            return http::respuesta(http::retNotFound,"no se encontro el id de cliente");
+
+            return response()->json(['mensaje'=>'No se encontró el id del cliente']);
         }
         $idCliente->delete();
+
+       return response()->json(['mensaje'=>'Eliminado con éxito']);
     }
 
 }
