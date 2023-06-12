@@ -36,8 +36,8 @@ class VentasController extends Controller
         'cliente_id' => $request->cliente_id
        ]);
 
-       $producto->cantidad -= $request->cantidad;
-       $producto->save();
+       $producto->cantidad -= $request->cantidad;//disminuye la cantidad de producto, es decir se actualiza la tabla ventas al guardar la cantidad de producto en esta tabla y se actualiza la cantidad en la tabla clintes
+       $producto->save();//cant existente menos ella misma menos la cantidad del request
 
        return http::respuesta(http::retOK, "venta realizada exitosamente");
     }
