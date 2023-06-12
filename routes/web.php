@@ -3,6 +3,7 @@
 use App\Http\Controllers\BodegaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,5 @@ Route::post('cliente/delete/{id}', [ClienteController::class, 'eliminarCliente']
 
 Route::post('producto/save',[ProductoController::class, 'productoSave'])->name('post.producto');
 Route::get('producto/list', [ProductoController::class, 'productosNom_bodega'])->name('get.clienteBodega');
+
+Route::post('ventas/producto',[VentasController::class, 'ventasProducto'])->name('get.ventas');
