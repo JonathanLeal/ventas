@@ -42,4 +42,13 @@ class ProductoController extends Controller
                 ->get();
          return  $sql;
     }
+
+    public function bodegaTres(){
+        $bodega=DB::table('productos AS p')
+                ->join('bodegas AS b', 'p.bodegas_id', '=', 'b.id')
+                ->select('p.nombre_pro','b.id')
+                ->where('b.id','=','3')
+                ->get();
+                return $bodega;
+    }
 }

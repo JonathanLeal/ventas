@@ -34,3 +34,8 @@ Route::post('producto/save',[ProductoController::class, 'productoSave'])->name('
 Route::get('producto/list', [ProductoController::class, 'productosNom_bodega'])->name('get.clienteBodega');
 
 Route::post('ventas/producto',[VentasController::class, 'ventasProducto'])->name('get.ventas');
+
+//mis practicas
+Route::get('productos/bodegas', [ProductoController::class, 'bodegaTres']);
+Route::get('ventas/cliente/producto/{id}',[VentasController::class, 'clienteProducto']);
+Route::post('ventas/producto/save',[VentasController::class, 'venta'])->name('get.ventas');
