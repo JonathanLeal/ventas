@@ -51,4 +51,20 @@ class ProductoController extends Controller
                 ->get();
                 return $bodega;
     }
+
+    public function productoBo($nombre_pro){
+
+
+        $nombreBo = DB::table('bodegas AS b')
+                ->join('productos AS p','b.id','=','p.bodegas_id')
+                ->select('b.nombre_bo')
+                ->where('p.nombre_pro','=',$nombre_pro)
+                ->first();//si es get me devuelve un arreglo, si es first solo devuelve el json
+
+                if(!$nombre_pro){
+                    return response()->json(['mensaje'=>'no se encuentra ese producto']);
+                }
+        return $nombreBo;
+
+    }
 }

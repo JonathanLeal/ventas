@@ -38,4 +38,6 @@ Route::post('ventas/producto',[VentasController::class, 'ventasProducto'])->name
 //mis practicas
 Route::get('productos/bodegas', [ProductoController::class, 'bodegaTres']);
 Route::get('ventas/cliente/producto/{id}',[VentasController::class, 'clienteProducto']);
+Route::get('productos/{nombre_pro}', [ProductoController::class, 'productoBo']);
+
 Route::post('ventas/producto/save',[VentasController::class, 'venta'])->name('get.ventas');
